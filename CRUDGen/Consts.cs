@@ -105,7 +105,7 @@ public interface I{modelName}Service : IService<{modelName}, Create{modelName}Dt
 
 public class {modelName}Service(I{modelName}Repository {modelName.ToLower()}Repository, IMapper mapper) : I{modelName}Service 
 {{
-   public async Task<IEnumerable<ProductCategory>> GetAllAsync() 
+   public async Task<IEnumerable<{modelName}>> GetAllAsync() 
    {{
         return await {modelName.ToLower()}Repository.GetAllAsync();
    }} 
@@ -168,13 +168,13 @@ public class {modelName}Controller(I{modelName}Service {modelName.ToLower()}Serv
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {{
-        return Ok(await {modelName.ToLower()}Service.GetAllAsync();
+        return Ok(await {modelName.ToLower()}Service.GetAllAsync());
     }}
     
-    [HttpGet(""{{id}}""]
+    [HttpGet(""{{id}}"")]
     public async Task<IActionResult> GetById(int id)
     {{
-        var result = await {modelName.ToLower()}Service.Get{modelName}Async(id);
+        var result = await {modelName.ToLower()}Service.GetByIdAsync(id);
         
         return result != null ? Ok(result) : NotFound();
     }}
@@ -182,21 +182,21 @@ public class {modelName}Controller(I{modelName}Service {modelName.ToLower()}Serv
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] Create{modelName}Dto create{modelName}Dto)
     {{
-        var id = await {modelName.ToLower()}Service.Create{modelName}Async(create{modelName}Dto);
+        var id = await {modelName.ToLower()}Service.CreateAsync(create{modelName}Dto);
         return CreatedAtAction(nameof({modelName}), id);
     }}
     
     [HttpPut(""{{id}}"")]
     public async Task<IActionResult> Put(int id, [FromBody] Update{modelName}Dto update{modelName}Dto)
     {{
-        await {modelName.ToLower()}Service.Update{modelName}Async(id, update{modelName}Dto);
+        await {modelName.ToLower()}Service.UpdateAsync(id, update{modelName}Dto);
         return NoContent();
     }}
     
     [HttpDelete(""{{id}}"")]
     public async Task<IActionResult> Delete(int id)
     {{
-        await {modelName.ToLower()}Service.Delete{modelName}Async(id);
+        await {modelName.ToLower()}Service.DeleteAsync(id);
         return NoContent();
     }}
 }}    

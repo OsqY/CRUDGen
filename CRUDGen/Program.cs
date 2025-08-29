@@ -9,6 +9,7 @@ var rootCommand = new RootCommand("CRUD Gen")
     new Option<string>("--modelsAssemblyDir"),
     new Option<string>("--dtosDir"),
     new Option<string>("--controllersDir"),
+    new Option<string>("--controllersAssemblyDir"),
     new Option<string>("--interfacesDir"),
     new Option<string>("--servicesDir"),
     new Option<string>("--modelsDir"),
@@ -29,11 +30,8 @@ string? servicesAssemblyDir = parseResult.GetValue<string>("--servicesAssemblyDi
 string? servicesDir = parseResult.GetValue<string>("--servicesDir");
 string? dtosAssemblyDir = parseResult.GetValue<string>("--dtosAssemblyDir");
 string? repositoriesAssemblyDir = parseResult.GetValue<string>("--repositoriesAssemblyDir");
-
-Console.WriteLine($"{modelsDir},{modelsDir},{modelsAssemblyDir},{dtoDir},{dbContextAssemblyDir},{repositoriesDir},{servicesAssemblyDir},{servicesDir}");
-CreateDtoFiles.CreateDtoFilesFromAssembly(modelsDir,modelsAssemblyDir,dtoDir);
-CreateRepositoriesFiles.CreateRepositories(dbContextAssemblyDir,repositoriesDir,
-    modelsDir,modelsAssemblyDir);
+string? controllersDir = parseResult.GetValue<string>("--controllersDir");
+string? controllersAssemblyDir = parseResult.GetValue<string>("--controllersAssemblyDir");
 
 ProcessStartInfo psi = new ProcessStartInfo();
 psi.FileName = "dotnet";
@@ -42,5 +40,15 @@ psi.WorkingDirectory = Directory.GetCurrentDirectory();
 Process? process = Process.Start(psi);
 if (process != null) await process.WaitForExitAsync();
 
+
+Console.WriteLine($"{modelsDir},{modelsDir},{modelsAssemblyDir},{dtoDir},{dbContextAssemblyDir},{repositoriesDir},{servicesAssemblyDir},{servicesDir}");
+CreateDtoFiles.CreateDtoFilesFromAssembly(modelsDir,modelsAssemblyDir,dtoDir);
+CreateRepositoriesFiles.CreateRepositories(dbContextAssemblyDir,repositoriesDir,
+    modelsDir,modelsAssemblyDir);
+
 CreateServicesFile.WriteServicesFile(servicesDir,servicesAssemblyDir,
     modelsDir,modelsAssemblyDir,dtosAssemblyDir,repositoriesAssemblyDir);
+    
+CreateControllerFiles.WriteControllersFiles(modelsAssemblyDir,servicesAssemblyDir,
+        controllersDir,controllersAssemblyDir,
+        dtosAssemblyDir, modelsDir);
