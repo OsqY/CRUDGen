@@ -8,7 +8,7 @@ namespace CRUDGen.Commands;
 public static class CreateRepositoriesFiles
 {
     public static bool CreateRepositories(string? dbContextAssemblyPath, string? repositoriesPath,
-        string? modelsPath, string? modelsAssemblyPath)
+        string? modelsPath, string? modelsAssemblyPath, bool overrideFiles)
     {
         if (string.IsNullOrEmpty(dbContextAssemblyPath) || string.IsNullOrEmpty(modelsAssemblyPath) ||
             string.IsNullOrEmpty(repositoriesPath) || string.IsNullOrEmpty(modelsPath))
@@ -89,6 +89,9 @@ public static class CreateRepositoriesFiles
                     var entityName = type.Name;
                     var entityRepositoryPath = Path.Combine(repositoriesPath, entityName, 
                         $"{entityName}Repository.cs");
+
+                    if (Path.Exists(entityRepositoryPath) && !overrideFiles)
+                        continue;
 
                     modelsNamespace = type.Namespace;
 

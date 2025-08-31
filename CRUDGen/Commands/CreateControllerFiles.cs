@@ -6,7 +6,7 @@ public static class CreateControllerFiles
 {
     public static bool WriteControllersFiles(string? modelsAssemblyPath, string? interfacesAssemblyPath,
         string? controllersPath, string? controllersAssemblyPath, string? dtosAssemblyPath,
-        string? modelsPath)
+        string? modelsPath, bool overrideFiles)
     {
         if (string.IsNullOrEmpty(modelsAssemblyPath) || string.IsNullOrEmpty(interfacesAssemblyPath) || 
             string.IsNullOrEmpty(controllersPath) || string.IsNullOrEmpty(controllersAssemblyPath)
@@ -85,11 +85,14 @@ public static class CreateControllerFiles
                if (modelType is { IsPublic: true, Namespace: not null, IsClass: true } &&
                    modelType.Namespace.EndsWith(modelsDirName))
                {
-                   Console.WriteLine($"Controllers: Writing to entity: {modelType.Name}");
-
                    string newFile = $"{modelType.Name}Controller.cs";
 
                    var newPath = Path.Combine(controllersPath, newFile);
+                   
+                   if (Path.Exists(newPath) && !overrideFiles)
+                       continue;
+                   
+                   Console.WriteLine($"Controllers: Writing to entity: {modelType.Name}");
                   
                    File.WriteAllText(newPath, Consts.GetControllerString(
                        modelType.Namespace,interfacesNamespace,dtosNamespace,

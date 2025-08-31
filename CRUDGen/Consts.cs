@@ -81,7 +81,7 @@ public interface IService<TEntity, TCDto, TUDto> where TEntity : class
 {
     Task<IEnumerable<TEntity>> GetAllAsync();
     Task<TEntity?> GetByIdAsync(int id);
-    Task<int> CreateAsync(TCDto dto);
+    Task<TEntity> CreateAsync(TCDto dto);
     Task<bool> UpdateAsync(int id, TUDto dto);
     Task<bool> DeleteAsync(int id);
 }
@@ -103,7 +103,7 @@ public interface I{modelName}Service : IService<{modelName}, Create{modelName}Dt
 {{
 }}
 
-public class {modelName}Service(I{modelName}Repository {modelName.ToLower()}Repository, IMapper mapper) : I{modelName}Service 
+public class {modelName}Service(I{modelName}Repository {modelName.ToLower()}Repository, IMapper mapper, IUnitOfWork unitOfWork) : I{modelName}Service 
 {{
    public async Task<IEnumerable<{modelName}>> GetAllAsync() 
    {{
@@ -115,11 +115,12 @@ public class {modelName}Service(I{modelName}Repository {modelName.ToLower()}Repo
         return await {modelName.ToLower()}Repository.GetByIdAsync(id);
     }}
 
-    public async Task<int> CreateAsync(Create{modelName}Dto create{modelName}Dto) 
+    public async Task<{modelName}> CreateAsync(Create{modelName}Dto create{modelName}Dto) 
     {{
         var {modelName.ToLower()} = mapper.Map<{modelName}>(create{modelName}Dto);
         await {modelName.ToLower()}Repository.AddAsync({modelName.ToLower()});
-        return {modelName.ToLower()}.Id;
+        await unitOfWork.SaveChangesAsync();
+        return {modelName.ToLower()};
     }}
 
     public async Task<bool> UpdateAsync(int id, Update{modelName}Dto update{modelName}Dto)
@@ -130,6 +131,7 @@ public class {modelName}Service(I{modelName}Repository {modelName.ToLower()}Repo
         {{
             {modelName.ToLower()} = mapper.Map<{modelName}>(update{modelName}Dto);
             {modelName.ToLower()}Repository.Update({modelName.ToLower()});
+            await unitOfWork.SaveChangesAsync();
             return true;
         }}
         return false;
@@ -142,6 +144,7 @@ public class {modelName}Service(I{modelName}Repository {modelName.ToLower()}Repo
         if ({modelName.ToLower()} != null)
         {{ 
             {modelName.ToLower()}Repository.Delete({modelName.ToLower()});
+            await unitOfWork.SaveChangesAsync();
             return true;
         }}
         return false;
@@ -171,7 +174,7 @@ public class {modelName}Controller(I{modelName}Service {modelName.ToLower()}Serv
         return Ok(await {modelName.ToLower()}Service.GetAllAsync());
     }}
     
-    [HttpGet(""{{id}}"")]
+    [HttpGet(""{{id}}"", Name = Get{modelName}ById)]
     public async Task<IActionResult> GetById(int id)
     {{
         var result = await {modelName.ToLower()}Service.GetByIdAsync(id);
@@ -182,8 +185,8 @@ public class {modelName}Controller(I{modelName}Service {modelName.ToLower()}Serv
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] Create{modelName}Dto create{modelName}Dto)
     {{
-        var id = await {modelName.ToLower()}Service.CreateAsync(create{modelName}Dto);
-        return CreatedAtAction(nameof({modelName}), id);
+        var {modelName[0].ToString().ToLower()}{modelName[new Range(1,modelName.Length)]} = await {modelName.ToLower()}Service.CreateAsync(create{modelName}Dto);
+        return CreatedAtRoute(""Get{modelName}ById"", new {{id = {modelName[0].ToString().ToLower()}{modelName[new Range(1,modelName.Length)]}.Id}}, {modelName[0].ToString().ToLower()}{modelName});
     }}
     
     [HttpPut(""{{id}}"")]

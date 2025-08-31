@@ -6,7 +6,7 @@ public static class CreateServicesFile
 {
     public static bool WriteServicesFile(string? servicesPath, string? servicesAssemblyPath,
         string? entitiesPath, string? entitiesAssemblyPath,
-        string? dtoAssemblyPath, string? interfacesPath)
+        string? dtoAssemblyPath, string? interfacesPath, bool overrideFiles)
     {
         if (string.IsNullOrEmpty(servicesPath) || string.IsNullOrEmpty(entitiesAssemblyPath) ||
             string.IsNullOrEmpty(dtoAssemblyPath) || string.IsNullOrEmpty(interfacesPath)
@@ -91,6 +91,9 @@ public static class CreateServicesFile
                     string fileName = $"{entityType.Name}.cs";
 
                     var file = Path.Combine(servicesPath, fileName);
+                    
+                    if (Path.Exists(file) && !overrideFiles)
+                        continue;
                     
                     File.WriteAllText(file,Consts.GetServiceString(
                         entityType.Name,dtosNamespace,entityNamespace,

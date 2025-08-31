@@ -5,7 +5,8 @@ namespace CRUDGen.Commands;
 
 public static class CreateDtoFiles
 {
-    public static bool CreateDtoFilesFromAssembly(string? modelsPath, string? assemblyPath, string? toDirectory)
+    public static bool CreateDtoFilesFromAssembly(string? modelsPath, string? assemblyPath, string? toDirectory,
+        bool overrideFiles)
     {
         if (string.IsNullOrEmpty(modelsPath) || string.IsNullOrEmpty(assemblyPath) || string.IsNullOrEmpty(toDirectory))
         {
@@ -37,24 +38,51 @@ public static class CreateDtoFiles
                 {
                     matchedTypes++;
                     Console.WriteLine($"Class to process: {aClass.Name}");
+                    var fileName = aClass.Name + "Dto.cs";
+                    var filePath = Path.Combine(toDirectory, fileName);
+
+                    if (Path.Exists(filePath) && !overrideFiles)
+                        continue;
                     
                     var properties = aClass.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                         .Where(p => p.CanRead && p.CanWrite);
 
                     var sb = new StringBuilder();
+                    var sbCollections = new StringBuilder();
+                    sbCollections.Append(", ");
                     foreach (var prop in properties)
                     {
-                        string propTypeName = GetFriendlyTypeName(prop.PropertyType);
-                        sb.Append($"{propTypeName} {prop.Name}, ");
+                        if (prop.PropertyType != typeof(string) &&
+                            typeof(System.Collections.IEnumerable).IsAssignableFrom(prop.PropertyType))
+                        {
+                            Type? genericType = prop.PropertyType.GetGenericArguments().FirstOrDefault();
+
+                            if (genericType != null)
+                            {
+                                sbCollections.Append($"IEnumerable<{genericType.Name}> {genericType.Name}s, ");
+                            }
+                            else
+                            {
+                                sbCollections.Append(GetFriendlyTypeName(prop.PropertyType));
+                            }
+                            
+                        }
+                        else
+                        {
+                            string propTypeName = GetFriendlyTypeName(prop.PropertyType);
+                            sb.Append($"{propTypeName} {prop.Name}, ");
+                        }
+                        
                     }
 
                     if (sb.Length > 0) sb.Length -= 2;
+                    sbCollections.Length -= 2;
 
-                    var fileName = aClass.Name + "Dto.cs";
-                    var filePath = Path.Combine(toDirectory, fileName);
                     string fileContent = $"namespace {dtoNamespace};\n\npublic record Create{aClass.Name}Dto({sb.ToString()});\n";
                     fileContent += $"public record Update{aClass.Name}Dto({sb.ToString()});\n";
-                    fileContent += $"public record Response{aClass.Name}Dto({sb.ToString()});\n";
+                    fileContent += $"public record Response{aClass.Name}Dto({sb.ToString()}{sbCollections.ToString()});\n";
+                    fileContent += $"public record {aClass.Name}Dto({sb.ToString()});\n";
+                    Console.WriteLine("DTO: Class processed\n");
                     File.WriteAllText(filePath, fileContent);
                 }
             }

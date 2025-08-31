@@ -17,7 +17,8 @@ var rootCommand = new RootCommand("CRUD Gen")
     new Option<string>("--repositoriesDir"),
     new Option<string>("--servicesAssemblyDir"),
     new Option<string>("--dtosAssemblyDir"),
-    new Option<string>("--repositoriesAssemblyDir")
+    new Option<string>("--repositoriesAssemblyDir"),
+    new Option<bool>("--overrideFiles")
 };
 
 ParseResult parseResult = rootCommand.Parse(args);
@@ -33,6 +34,8 @@ string? repositoriesAssemblyDir = parseResult.GetValue<string>("--repositoriesAs
 string? controllersDir = parseResult.GetValue<string>("--controllersDir");
 string? controllersAssemblyDir = parseResult.GetValue<string>("--controllersAssemblyDir");
 
+var result = parseResult.GetValue<bool>("--overrideFiles");
+
 ProcessStartInfo psi = new ProcessStartInfo();
 psi.FileName = "dotnet";
 psi.Arguments = "build";
@@ -42,13 +45,13 @@ if (process != null) await process.WaitForExitAsync();
 
 
 Console.WriteLine($"{modelsDir},{modelsDir},{modelsAssemblyDir},{dtoDir},{dbContextAssemblyDir},{repositoriesDir},{servicesAssemblyDir},{servicesDir}");
-CreateDtoFiles.CreateDtoFilesFromAssembly(modelsDir,modelsAssemblyDir,dtoDir);
+CreateDtoFiles.CreateDtoFilesFromAssembly(modelsDir,modelsAssemblyDir,dtoDir, result);
 CreateRepositoriesFiles.CreateRepositories(dbContextAssemblyDir,repositoriesDir,
-    modelsDir,modelsAssemblyDir);
+    modelsDir,modelsAssemblyDir, result);
 
 CreateServicesFile.WriteServicesFile(servicesDir,servicesAssemblyDir,
-    modelsDir,modelsAssemblyDir,dtosAssemblyDir,repositoriesAssemblyDir);
+    modelsDir,modelsAssemblyDir,dtosAssemblyDir,repositoriesAssemblyDir, result);
     
 CreateControllerFiles.WriteControllersFiles(modelsAssemblyDir,servicesAssemblyDir,
         controllersDir,controllersAssemblyDir,
-        dtosAssemblyDir, modelsDir);
+        dtosAssemblyDir, modelsDir, result);
