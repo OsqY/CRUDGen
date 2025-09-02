@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text;
+using CRUDGen.Tts;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -97,8 +98,18 @@ public static class CreateRepositoriesFiles
 
                     Directory.CreateDirectory(Path.Combine(repositoriesPath, entityName));
 
-                    File.WriteAllText(entityRepositoryPath,Consts.RepositoryStringImplementation(
-                        entityName,modelsNamespace,repositoryNameSpace));
+                    var temp = new RepositoryFile();
+
+                    temp.Session = new Dictionary<string, object>
+                    {
+                        { "EntityName", entityName },
+                        { "ModelNamespace", modelsNamespace },
+                        { "RepositoryNamespace", repositoryNameSpace},
+                    };
+                        
+                    temp.Initialize();
+
+                    File.WriteAllText(entityRepositoryPath,temp.TransformText());
                 
                     Console.WriteLine("Finished writing");
                     

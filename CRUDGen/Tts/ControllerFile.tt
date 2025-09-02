@@ -1,0 +1,59 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter name="ModelsNamespace" type="System.String" #>
+<#@ parameter name="InterfacesNamespace" type="System.String" #>
+<#@ parameter name="DtosNamespace" type="System.String" #>
+<#@ parameter name="ControllersNamespace" type="System.String" #>
+<#@ parameter name="ModelName" type="System.String" #>
+<#
+    var modelInstance = ModelName[0].ToString().ToLower() + ModelName.Substring(1);
+#>
+using <#= ModelsNamespace #>;
+using <#= InterfacesNamespace #>;
+using <#= DtosNamespace #>;
+using Microsoft.AspNetCore.Mvc;
+
+namespace <#= ControllersNamespace #>;
+
+[ApiController]
+[Route("api/[controller]")]
+public class <#= ModelName #>Controller(I<#= ModelName #>Service <#= modelInstance #>Service) : ControllerBase
+{
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        return Ok(await <#= modelInstance #>Service.GetAllAsync());
+    }
+    
+    [HttpGet("{id}", Name = "Get<#= ModelName #>ById")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var result = await <#= modelInstance #>Service.GetByIdAsync(id);
+        
+        return result != null ? Ok(result) : NotFound();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody] Create<#= ModelName #>Dto create<#= ModelName #>Dto)
+    {
+        var <#= modelInstance #> = await <#= modelInstance #>Service.CreateAsync(create<#= ModelName #>Dto);
+        return CreatedAtRoute("Get<#= ModelName #>ById", new { id = <#= modelInstance #>.Id }, <#= modelInstance #>);
+    }
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, [FromBody] Update<#= ModelName #>Dto update<#= ModelName #>Dto)
+    {
+        var result = await <#= modelInstance #>Service.UpdateAsync(id, update<#= ModelName #>Dto);
+        return result ? NoContent() : NotFound();
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await <#= modelInstance #>Service.DeleteAsync(id);
+        return result ? NoContent() : NotFound();
+    }
+}

@@ -1,0 +1,73 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core"#>
+<#@ import namespace="System.Linq"#>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter name="DtosNamespace" type="System.String"#>
+<#@ parameter name="EntitiesNamespace" type="System.String"#>
+<#@ parameter name="EntityName" type="System.String"#>
+<#@ parameter name="RepositoryNamespace" type="System.String"#>
+<#@ parameter name="ServicesNamespace" type="System.String"#>
+<#@ import namespace="CRUDGen.Lib" #>
+<#
+    var modelName = ModelNamesUtils.ConvertModelNameToVariableName(EntityName);
+#>
+
+using AutoMapper;
+using <#= EntitiesNamespace#>;
+using <#= DtosNamespace#>;
+using <#= RepositoryNamespace#>;
+
+namespace <#= ServicesNamespace#>;
+
+public interface I<#= EntityName#>Service : IService<<#= EntityName#>, Create<#= EntityName#>Dto, Update<#= EntityName#>Dto>
+{
+}
+
+public class <#= EntityName#>Service(I<#= EntityName#>Repository <#= modelName#>Repository, IMapper mapper, IUnitOfWork unitOfWork) : I<#= EntityName#>Service 
+{
+   public async Task<IEnumerable<<#= EntityName#>>> GetAllAsync() 
+   {
+        return await <#= EntityName #>Repository.GetAllAsync();
+   }
+
+    public async Task<<#= EntityName#>?> GetByIdAsync(int id)
+    {
+        return await <#= modelName#>Repository.GetByIdAsync(id);
+    }
+
+    public async Task<<#= EntityName#>> CreateAsync(Create<#= EntityName#>Dto create<#= EntityName#>Dto) 
+    {
+        var <#= modelName #> = mapper.Map<<#= EntityName#>>(create<#= EntityName#>Dto);
+        await <#= modelName #>Repository.AddAsync(<#= modelName #>);
+        await unitOfWork.SaveChangesAsync();
+        return <#= modelName #>;
+    }
+
+    public async Task<bool> UpdateAsync(int id, Update<#= EntityName#>Dto update<#= EntityName#>Dto)
+    {
+        var <#= modelName#> = await <#= modelName#>Repository.GetByIdAsync(id);
+        
+        if (<#= modelName#> != null) 
+        {
+            <#= modelName#> = mapper.Map<<#= EntityName#>>(update<#= EntityName#>Dto);
+            <#= modelName#>Repository.Update(<#= modelName#>);
+            await unitOfWork.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var <#= modelName#> = await <#= modelName#>Repository.GetByIdAsync(id);
+        
+        if (<#= modelName#> != null)
+        {
+            <#= modelName#>Repository.Delete(<#= modelName#>);
+            await unitOfWork.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
+}

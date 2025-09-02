@@ -22,4 +22,39 @@
       <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <Compile Update="Tts\ControllerFile.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>ControllerFile.tt</DependentUpon>
+      </Compile>
+      <Compile Update="Tts\RepositoryFile.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>RepositoryFile.tt</DependentUpon>
+      </Compile>
+      <Compile Update="Tts\ServiceFile.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>ServiceFile.tt</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <None Update="Tts\ControllerFile.tt">
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+        <LastGenOutput>ControllerFile.cs</LastGenOutput>
+      </None>
+      <None Update="Tts\RepositoryFile.tt">
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+        <LastGenOutput>RepositoryFile.cs</LastGenOutput>
+      </None>
+      <None Update="Tts\ServiceFile.tt">
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+        <LastGenOutput>ServiceFile.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
+
 </Project>

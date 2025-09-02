@@ -1,4 +1,5 @@
 using System.Reflection;
+using CRUDGen.Tts;
 
 namespace CRUDGen.Commands;
 
@@ -94,10 +95,21 @@ public static class CreateServicesFile
                     
                     if (Path.Exists(file) && !overrideFiles)
                         continue;
+
+                    var temp = new ServiceFile();
+
+                    temp.Session = new Dictionary<string, object>
+                    {
+                        {"DtosNamespace", dtosNamespace},
+                        {"EntitiesNamespace", entityNamespace},
+                        {"EntityName", entityType.Name},
+                        {"ServicesNamespace", servicesNamespace},
+                        {"RepositoryNamespace", repositoryNamespace},
+                    };
+
+                    temp.Initialize();
                     
-                    File.WriteAllText(file,Consts.GetServiceString(
-                        entityType.Name,dtosNamespace,entityNamespace,
-                        servicesNamespace,repositoryNamespace));
+                    File.WriteAllText(file,temp.TransformText());
                     
                     File.WriteAllText(Path.Combine(servicesPath,"IService.cs"),
                         Consts.GetGenericService());

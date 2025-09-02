@@ -1,4 +1,5 @@
 using System.Reflection;
+using CRUDGen.Tts;
 
 namespace CRUDGen.Commands;
 
@@ -93,10 +94,21 @@ public static class CreateControllerFiles
                        continue;
                    
                    Console.WriteLine($"Controllers: Writing to entity: {modelType.Name}");
-                  
-                   File.WriteAllText(newPath, Consts.GetControllerString(
-                       modelType.Namespace,interfacesNamespace,dtosNamespace,
-                       controllersNamespace,modelType.Name));
+
+                   var temp = new ControllerFile();
+
+                   temp.Session = new Dictionary<string, object>
+                   {
+                       { "ModelsNamespace", modelType.Namespace },
+                       { "InterfacesNamespace", interfacesNamespace },
+                       { "DtosNamespace", dtosNamespace },
+                       { "ControllersNamespace", controllersNamespace },
+                       { "ModelName", modelType.Name},
+                   };
+                   
+                   temp.Initialize();
+
+                   File.WriteAllText(newPath, temp.TransformText());
 
                    Console.WriteLine("Controllers: Finished writing");
                }
