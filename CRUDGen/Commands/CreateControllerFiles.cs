@@ -96,17 +96,12 @@ public static class CreateControllerFiles
                    Console.WriteLine($"Controllers: Writing to entity: {modelType.Name}");
 
                    var temp = new ControllerFile();
-
-                   temp.Session = new Dictionary<string, object>
-                   {
-                       { "ModelsNamespace", modelType.Namespace },
-                       { "InterfacesNamespace", interfacesNamespace },
-                       { "DtosNamespace", dtosNamespace },
-                       { "ControllersNamespace", controllersNamespace },
-                       { "ModelName", modelType.Name},
-                   };
                    
-                   temp.Initialize();
+                   temp.ModelsNamespace = modelType.Namespace;
+                   temp.DtosNamespace = dtosNamespace;
+                   temp.ModelName = modelType.Name;
+                   temp.ControllersNamespace = controllersNamespace;
+                   temp.InterfacesNamespace = interfacesNamespace;
 
                    File.WriteAllText(newPath, temp.TransformText());
 

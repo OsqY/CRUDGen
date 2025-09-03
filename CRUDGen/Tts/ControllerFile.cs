@@ -29,7 +29,7 @@ namespace CRUDGen.Tts
         public virtual string TransformText()
         {
             
-            #line 11 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 6 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
 
     var modelInstance = ModelName[0].ToString().ToLower() + ModelName.Substring(1);
 
@@ -38,319 +38,176 @@ namespace CRUDGen.Tts
             #line hidden
             this.Write("using ");
             
-            #line 14 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 9 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelsNamespace));
             
             #line default
             #line hidden
             this.Write(";\nusing ");
             
-            #line 15 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 10 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(InterfacesNamespace));
             
             #line default
             #line hidden
             this.Write(";\nusing ");
             
-            #line 16 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 11 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DtosNamespace));
             
             #line default
             #line hidden
             this.Write(";\nusing Microsoft.AspNetCore.Mvc;\n\nnamespace ");
             
-            #line 19 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 14 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ControllersNamespace));
             
             #line default
             #line hidden
             this.Write(";\n\n[ApiController]\n[Route(\"api/[controller]\")]\npublic class ");
             
-            #line 23 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 18 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("Controller(I");
             
-            #line 23 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 18 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("Service ");
             
-            #line 23 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 18 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelInstance));
             
             #line default
             #line hidden
             this.Write("Service) : ControllerBase\n{\n    [HttpGet]\n    public async Task<IActionResult> GetAll()\n    {\n        return Ok(await ");
             
-            #line 28 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 23 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelInstance));
             
             #line default
             #line hidden
             this.Write("Service.GetAllAsync());\n    }\n    \n    [HttpGet(\"{id}\", Name = \"Get");
             
-            #line 31 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 26 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("ById\")]\n    public async Task<IActionResult> GetById(int id)\n    {\n        var result = await ");
             
-            #line 34 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 29 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelInstance));
             
             #line default
             #line hidden
             this.Write("Service.GetByIdAsync(id);\n        \n        return result != null ? Ok(result) : NotFound();\n    }\n\n    [HttpPost]\n    public async Task<IActionResult> Post([FromBody] Create");
             
-            #line 40 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 35 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("Dto create");
             
-            #line 40 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 35 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("Dto)\n    {\n        var ");
             
-            #line 42 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 37 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelInstance));
             
             #line default
             #line hidden
             this.Write(" = await ");
             
-            #line 42 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 37 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelInstance));
             
             #line default
             #line hidden
             this.Write("Service.CreateAsync(create");
             
-            #line 42 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 37 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("Dto);\n        return CreatedAtRoute(\"Get");
             
-            #line 43 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 38 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("ById\", new { id = ");
             
-            #line 43 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 38 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelInstance));
             
             #line default
             #line hidden
             this.Write(".Id }, ");
             
-            #line 43 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 38 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelInstance));
             
             #line default
             #line hidden
             this.Write(");\n    }\n    \n    [HttpPut(\"{id}\")]\n    public async Task<IActionResult> Put(int id, [FromBody] Update");
             
-            #line 47 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 42 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("Dto update");
             
-            #line 47 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 42 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("Dto)\n    {\n        var result = await ");
             
-            #line 49 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 44 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelInstance));
             
             #line default
             #line hidden
             this.Write("Service.UpdateAsync(id, update");
             
-            #line 49 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 44 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelName));
             
             #line default
             #line hidden
             this.Write("Dto);\n        return result ? NoContent() : NotFound();\n    }\n    \n    [HttpDelete(\"{id}\")]\n    public async Task<IActionResult> Delete(int id)\n    {\n        var result = await ");
             
-            #line 56 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+            #line 51 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelInstance));
             
             #line default
             #line hidden
-            this.Write("Service.DeleteAsync(id);\n        return result ? NoContent() : NotFound();\n    }\n}");
+            this.Write("Service.DeleteAsync(id);\n        return result ? NoContent() : NotFound();\n    }\n}\n\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
+        #line 56 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ControllerFile.tt"
 
-private string _ModelsNamespaceField;
-
-/// <summary>
-/// Access the ModelsNamespace parameter of the template.
-/// </summary>
-private string ModelsNamespace
-{
-    get
-    {
-        return this._ModelsNamespaceField;
-    }
-}
-
-private string _InterfacesNamespaceField;
-
-/// <summary>
-/// Access the InterfacesNamespace parameter of the template.
-/// </summary>
-private string InterfacesNamespace
-{
-    get
-    {
-        return this._InterfacesNamespaceField;
-    }
-}
-
-private string _DtosNamespaceField;
-
-/// <summary>
-/// Access the DtosNamespace parameter of the template.
-/// </summary>
-private string DtosNamespace
-{
-    get
-    {
-        return this._DtosNamespaceField;
-    }
-}
-
-private string _ControllersNamespaceField;
-
-/// <summary>
-/// Access the ControllersNamespace parameter of the template.
-/// </summary>
-private string ControllersNamespace
-{
-    get
-    {
-        return this._ControllersNamespaceField;
-    }
-}
-
-private string _ModelNameField;
-
-/// <summary>
-/// Access the ModelName parameter of the template.
-/// </summary>
-private string ModelName
-{
-    get
-    {
-        return this._ModelNameField;
-    }
-}
-
-
-/// <summary>
-/// Initialize the template
-/// </summary>
-public virtual void Initialize()
-{
-    if ((this.Errors.HasErrors == false))
-    {
-bool ModelsNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("ModelsNamespace"))
-{
-    this._ModelsNamespaceField = ((string)(this.Session["ModelsNamespace"]));
-    ModelsNamespaceValueAcquired = true;
-}
-if ((ModelsNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ModelsNamespace");
-    if ((data != null))
-    {
-        this._ModelsNamespaceField = ((string)(data));
-    }
-}
-bool InterfacesNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("InterfacesNamespace"))
-{
-    this._InterfacesNamespaceField = ((string)(this.Session["InterfacesNamespace"]));
-    InterfacesNamespaceValueAcquired = true;
-}
-if ((InterfacesNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("InterfacesNamespace");
-    if ((data != null))
-    {
-        this._InterfacesNamespaceField = ((string)(data));
-    }
-}
-bool DtosNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("DtosNamespace"))
-{
-    this._DtosNamespaceField = ((string)(this.Session["DtosNamespace"]));
-    DtosNamespaceValueAcquired = true;
-}
-if ((DtosNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DtosNamespace");
-    if ((data != null))
-    {
-        this._DtosNamespaceField = ((string)(data));
-    }
-}
-bool ControllersNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("ControllersNamespace"))
-{
-    this._ControllersNamespaceField = ((string)(this.Session["ControllersNamespace"]));
-    ControllersNamespaceValueAcquired = true;
-}
-if ((ControllersNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ControllersNamespace");
-    if ((data != null))
-    {
-        this._ControllersNamespaceField = ((string)(data));
-    }
-}
-bool ModelNameValueAcquired = false;
-if (this.Session.ContainsKey("ModelName"))
-{
-    this._ModelNameField = ((string)(this.Session["ModelName"]));
-    ModelNameValueAcquired = true;
-}
-if ((ModelNameValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ModelName");
-    if ((data != null))
-    {
-        this._ModelNameField = ((string)(data));
-    }
-}
-
-
-    }
-}
-
+    public string ModelsNamespace { get; set; }
+    public string InterfacesNamespace { get; set; }
+    public string DtosNamespace { get; set; }
+    public string ControllersNamespace { get; set; }
+    public string ModelName { get; set; }
 
         
         #line default

@@ -98,16 +98,11 @@ public static class CreateServicesFile
 
                     var temp = new ServiceFile();
 
-                    temp.Session = new Dictionary<string, object>
-                    {
-                        {"DtosNamespace", dtosNamespace},
-                        {"EntitiesNamespace", entityNamespace},
-                        {"EntityName", entityType.Name},
-                        {"ServicesNamespace", servicesNamespace},
-                        {"RepositoryNamespace", repositoryNamespace},
-                    };
-
-                    temp.Initialize();
+                    temp.DtosNamespace = dtosNamespace;
+                    temp.EntitiesNamespace = entityNamespace;
+                    temp.EntityName = entityType.Name;
+                    temp.ServicesNamespace = servicesNamespace;
+                    temp.RepositoryNamespace = repositoryNamespace;
                     
                     File.WriteAllText(file,temp.TransformText());
                     

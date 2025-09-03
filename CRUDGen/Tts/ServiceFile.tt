@@ -3,11 +3,6 @@
 <#@ import namespace="System.Linq"#>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ parameter name="DtosNamespace" type="System.String"#>
-<#@ parameter name="EntitiesNamespace" type="System.String"#>
-<#@ parameter name="EntityName" type="System.String"#>
-<#@ parameter name="RepositoryNamespace" type="System.String"#>
-<#@ parameter name="ServicesNamespace" type="System.String"#>
 <#@ import namespace="CRUDGen.Lib" #>
 <#
     var modelName = ModelNamesUtils.ConvertModelNameToVariableName(EntityName);
@@ -28,7 +23,7 @@ public class <#= EntityName#>Service(I<#= EntityName#>Repository <#= modelName#>
 {
    public async Task<IEnumerable<<#= EntityName#>>> GetAllAsync() 
    {
-        return await <#= EntityName #>Repository.GetAllAsync();
+        return await <#= modelName #>Repository.GetAllAsync();
    }
 
     public async Task<<#= EntityName#>?> GetByIdAsync(int id)
@@ -50,7 +45,7 @@ public class <#= EntityName#>Service(I<#= EntityName#>Repository <#= modelName#>
         
         if (<#= modelName#> != null) 
         {
-            <#= modelName#> = mapper.Map<<#= EntityName#>>(update<#= EntityName#>Dto);
+            mapper.Map(update<#= EntityName#>Dto, <#= modelName#>);
             <#= modelName#>Repository.Update(<#= modelName#>);
             await unitOfWork.SaveChangesAsync();
             return true;
@@ -71,3 +66,11 @@ public class <#= EntityName#>Service(I<#= EntityName#>Repository <#= modelName#>
         return false;
     }
 }
+
+<#+
+    public string DtosNamespace { get; set; }
+    public string EntitiesNamespace { get; set; }
+    public string EntityName { get; set; }
+    public string RepositoryNamespace { get; set; }
+    public string ServicesNamespace { get; set; }
+#>

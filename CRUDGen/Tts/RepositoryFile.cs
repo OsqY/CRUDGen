@@ -12,6 +12,7 @@ namespace CRUDGen.Tts
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
     using System;
     
     /// <summary>
@@ -28,155 +29,65 @@ namespace CRUDGen.Tts
         /// </summary>
         public virtual string TransformText()
         {
+            this.Write("\n");
             this.Write("\nusing ");
             
-            #line 10 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
+            #line 9 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelNamespace));
             
             #line default
             #line hidden
             this.Write(";\nusing Microsoft.EntityFrameworkCore;\n\nnamespace ");
             
-            #line 13 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
+            #line 12 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(RepositoryNamespace));
             
             #line default
             #line hidden
             this.Write(";\n\npublic interface I");
             
-            #line 15 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
+            #line 14 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
-            this.Write("Repository : IRepository");
+            this.Write("Repository : IRepository<");
             
-            #line 15 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
+            #line 14 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
-            this.Write(" \n{\n}\n\npublic class ");
+            this.Write("> \n{\n}\n\npublic class ");
+            
+            #line 18 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("Repository(DbContext context) \n        : GenericRepository<");
             
             #line 19 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
-            this.Write("Repository(DbContext context) : \n        : GenericRepository");
+            this.Write(">(context), I");
             
-            #line 20 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
+            #line 19 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
-            this.Write("(context), I");
-            
-            #line 20 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("Repository\n{\n}\n");
+            this.Write("Repository\n{\n}\n\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
+        #line 23 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/RepositoryFile.tt"
 
-private string _EntityNameField;
-
-/// <summary>
-/// Access the EntityName parameter of the template.
-/// </summary>
-private string EntityName
-{
-    get
-    {
-        return this._EntityNameField;
-    }
-}
-
-private string _ModelNamespaceField;
-
-/// <summary>
-/// Access the ModelNamespace parameter of the template.
-/// </summary>
-private string ModelNamespace
-{
-    get
-    {
-        return this._ModelNamespaceField;
-    }
-}
-
-private string _RepositoryNamespaceField;
-
-/// <summary>
-/// Access the RepositoryNamespace parameter of the template.
-/// </summary>
-private string RepositoryNamespace
-{
-    get
-    {
-        return this._RepositoryNamespaceField;
-    }
-}
-
-
-/// <summary>
-/// Initialize the template
-/// </summary>
-public virtual void Initialize()
-{
-    if ((this.Errors.HasErrors == false))
-    {
-bool EntityNameValueAcquired = false;
-if (this.Session.ContainsKey("EntityName"))
-{
-    this._EntityNameField = ((string)(this.Session["EntityName"]));
-    EntityNameValueAcquired = true;
-}
-if ((EntityNameValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("EntityName");
-    if ((data != null))
-    {
-        this._EntityNameField = ((string)(data));
-    }
-}
-bool ModelNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("ModelNamespace"))
-{
-    this._ModelNamespaceField = ((string)(this.Session["ModelNamespace"]));
-    ModelNamespaceValueAcquired = true;
-}
-if ((ModelNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ModelNamespace");
-    if ((data != null))
-    {
-        this._ModelNamespaceField = ((string)(data));
-    }
-}
-bool RepositoryNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("RepositoryNamespace"))
-{
-    this._RepositoryNamespaceField = ((string)(this.Session["RepositoryNamespace"]));
-    RepositoryNamespaceValueAcquired = true;
-}
-if ((RepositoryNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("RepositoryNamespace");
-    if ((data != null))
-    {
-        this._RepositoryNamespaceField = ((string)(data));
-    }
-}
-
-
-    }
-}
-
+    public string EntityName { get; set; }
+    public string ModelNamespace { get; set; }
+    public string RepositoryNamespace { get; set; }
 
         
         #line default

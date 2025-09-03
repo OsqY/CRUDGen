@@ -30,7 +30,7 @@ namespace CRUDGen.Tts
         public virtual string TransformText()
         {
             
-            #line 12 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 7 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
 
     var modelName = ModelNamesUtils.ConvertModelNameToVariableName(EntityName);
 
@@ -39,438 +39,288 @@ namespace CRUDGen.Tts
             #line hidden
             this.Write("\nusing AutoMapper;\nusing ");
             
-            #line 17 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 12 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntitiesNamespace));
             
             #line default
             #line hidden
             this.Write(";\nusing ");
             
-            #line 18 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 13 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DtosNamespace));
             
             #line default
             #line hidden
             this.Write(";\nusing ");
             
-            #line 19 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 14 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(RepositoryNamespace));
             
             #line default
             #line hidden
             this.Write(";\n\nnamespace ");
             
-            #line 21 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 16 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ServicesNamespace));
             
             #line default
             #line hidden
             this.Write(";\n\npublic interface I");
             
-            #line 23 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 18 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Service : IService<");
             
-            #line 23 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 18 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write(", Create");
             
-            #line 23 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 18 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Dto, Update");
             
-            #line 23 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 18 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Dto>\n{\n}\n\npublic class ");
             
-            #line 27 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 22 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Service(I");
             
-            #line 27 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 22 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Repository ");
             
-            #line 27 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 22 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write("Repository, IMapper mapper, IUnitOfWork unitOfWork) : I");
             
-            #line 27 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 22 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Service \n{\n   public async Task<IEnumerable<");
             
-            #line 29 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 24 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write(">> GetAllAsync() \n   {\n        return await ");
             
-            #line 31 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
+            #line 26 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write("Repository.GetAllAsync();\n   }\n\n    public async Task<");
             
-            #line 34 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 29 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("?> GetByIdAsync(int id)\n    {\n        return await ");
             
-            #line 36 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 31 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write("Repository.GetByIdAsync(id);\n    }\n\n    public async Task<");
             
-            #line 39 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 34 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("> CreateAsync(Create");
             
-            #line 39 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 34 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Dto create");
             
-            #line 39 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 34 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Dto) \n    {\n        var ");
             
-            #line 41 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 36 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write(" = mapper.Map<");
             
-            #line 41 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 36 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write(">(create");
             
-            #line 41 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 36 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Dto);\n        await ");
             
-            #line 42 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 37 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write("Repository.AddAsync(");
             
-            #line 42 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 37 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write(");\n        await unitOfWork.SaveChangesAsync();\n        return ");
             
-            #line 44 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 39 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write(";\n    }\n\n    public async Task<bool> UpdateAsync(int id, Update");
             
-            #line 47 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 42 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Dto update");
             
-            #line 47 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 42 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
             
             #line default
             #line hidden
             this.Write("Dto)\n    {\n        var ");
             
-            #line 49 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 44 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write(" = await ");
             
-            #line 49 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 44 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write("Repository.GetByIdAsync(id);\n        \n        if (");
             
-            #line 51 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 46 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
-            this.Write(" != null) \n        {\n            ");
+            this.Write(" != null) \n        {\n            mapper.Map(update");
             
-            #line 53 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 48 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
+            
+            #line default
+            #line hidden
+            this.Write("Dto, ");
+            
+            #line 48 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
-            this.Write(" = mapper.Map<");
+            this.Write(");\n            ");
             
-            #line 53 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
-            
-            #line default
-            #line hidden
-            this.Write(">(update");
-            
-            #line 53 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(EntityName));
-            
-            #line default
-            #line hidden
-            this.Write("Dto);\n            ");
-            
-            #line 54 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 49 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write("Repository.Update(");
             
-            #line 54 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 49 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write(");\n            await unitOfWork.SaveChangesAsync();\n            return true;\n        }\n        return false;\n    }\n\n    public async Task<bool> DeleteAsync(int id)\n    {\n        var ");
             
-            #line 63 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 58 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write(" = await ");
             
-            #line 63 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 58 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write("Repository.GetByIdAsync(id);\n        \n        if (");
             
-            #line 65 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 60 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write(" != null)\n        {\n            ");
             
-            #line 67 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 62 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
             this.Write("Repository.Delete(");
             
-            #line 67 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+            #line 62 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelName));
             
             #line default
             #line hidden
-            this.Write(");\n            await unitOfWork.SaveChangesAsync();\n            return true;\n        }\n        return false;\n    }\n}\n");
+            this.Write(");\n            await unitOfWork.SaveChangesAsync();\n            return true;\n        }\n        return false;\n    }\n}\n\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
+        #line 70 "/home/osqyfr/Desktop/CRUDGen/CRUDGen/Tts/ServiceFile.tt"
 
-private string _DtosNamespaceField;
-
-/// <summary>
-/// Access the DtosNamespace parameter of the template.
-/// </summary>
-private string DtosNamespace
-{
-    get
-    {
-        return this._DtosNamespaceField;
-    }
-}
-
-private string _EntitiesNamespaceField;
-
-/// <summary>
-/// Access the EntitiesNamespace parameter of the template.
-/// </summary>
-private string EntitiesNamespace
-{
-    get
-    {
-        return this._EntitiesNamespaceField;
-    }
-}
-
-private string _EntityNameField;
-
-/// <summary>
-/// Access the EntityName parameter of the template.
-/// </summary>
-private string EntityName
-{
-    get
-    {
-        return this._EntityNameField;
-    }
-}
-
-private string _RepositoryNamespaceField;
-
-/// <summary>
-/// Access the RepositoryNamespace parameter of the template.
-/// </summary>
-private string RepositoryNamespace
-{
-    get
-    {
-        return this._RepositoryNamespaceField;
-    }
-}
-
-private string _ServicesNamespaceField;
-
-/// <summary>
-/// Access the ServicesNamespace parameter of the template.
-/// </summary>
-private string ServicesNamespace
-{
-    get
-    {
-        return this._ServicesNamespaceField;
-    }
-}
-
-
-/// <summary>
-/// Initialize the template
-/// </summary>
-public virtual void Initialize()
-{
-    if ((this.Errors.HasErrors == false))
-    {
-bool DtosNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("DtosNamespace"))
-{
-    this._DtosNamespaceField = ((string)(this.Session["DtosNamespace"]));
-    DtosNamespaceValueAcquired = true;
-}
-if ((DtosNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DtosNamespace");
-    if ((data != null))
-    {
-        this._DtosNamespaceField = ((string)(data));
-    }
-}
-bool EntitiesNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("EntitiesNamespace"))
-{
-    this._EntitiesNamespaceField = ((string)(this.Session["EntitiesNamespace"]));
-    EntitiesNamespaceValueAcquired = true;
-}
-if ((EntitiesNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("EntitiesNamespace");
-    if ((data != null))
-    {
-        this._EntitiesNamespaceField = ((string)(data));
-    }
-}
-bool EntityNameValueAcquired = false;
-if (this.Session.ContainsKey("EntityName"))
-{
-    this._EntityNameField = ((string)(this.Session["EntityName"]));
-    EntityNameValueAcquired = true;
-}
-if ((EntityNameValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("EntityName");
-    if ((data != null))
-    {
-        this._EntityNameField = ((string)(data));
-    }
-}
-bool RepositoryNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("RepositoryNamespace"))
-{
-    this._RepositoryNamespaceField = ((string)(this.Session["RepositoryNamespace"]));
-    RepositoryNamespaceValueAcquired = true;
-}
-if ((RepositoryNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("RepositoryNamespace");
-    if ((data != null))
-    {
-        this._RepositoryNamespaceField = ((string)(data));
-    }
-}
-bool ServicesNamespaceValueAcquired = false;
-if (this.Session.ContainsKey("ServicesNamespace"))
-{
-    this._ServicesNamespaceField = ((string)(this.Session["ServicesNamespace"]));
-    ServicesNamespaceValueAcquired = true;
-}
-if ((ServicesNamespaceValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ServicesNamespace");
-    if ((data != null))
-    {
-        this._ServicesNamespaceField = ((string)(data));
-    }
-}
-
-
-    }
-}
-
+    public string DtosNamespace { get; set; }
+    public string EntitiesNamespace { get; set; }
+    public string EntityName { get; set; }
+    public string RepositoryNamespace { get; set; }
+    public string ServicesNamespace { get; set; }
 
         
         #line default

@@ -49,7 +49,7 @@ public static class CreateRepositoriesFiles
             foreach (Type type in allTypes)
             {
                 if (type is { IsInterface: true, IsPublic: true, Namespace: not null }
-                    && type.Name != "IRepository" && !foundIRepository)
+                    && type.Name != "IRepository" && !foundIRepository && !overrideFiles)
                 {
                     Console.WriteLine("found IRepository doesn't exist");
                     foundIRepository = true;
@@ -100,15 +100,10 @@ public static class CreateRepositoriesFiles
 
                     var temp = new RepositoryFile();
 
-                    temp.Session = new Dictionary<string, object>
-                    {
-                        { "EntityName", entityName },
-                        { "ModelNamespace", modelsNamespace },
-                        { "RepositoryNamespace", repositoryNameSpace},
-                    };
+                    temp.EntityName = entityName;
+                    temp.ModelNamespace = modelsNamespace;
+                    temp.RepositoryNamespace = repositoryNameSpace;
                         
-                    temp.Initialize();
-
                     File.WriteAllText(entityRepositoryPath,temp.TransformText());
                 
                     Console.WriteLine("Finished writing");

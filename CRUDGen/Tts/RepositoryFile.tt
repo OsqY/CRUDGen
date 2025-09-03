@@ -3,20 +3,26 @@
 <#@ import namespace="System.Linq"#>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ parameter name="EntityName" type="System.String"#>
-<#@ parameter name="ModelNamespace" type="System.String"#>
-<#@ parameter name="RepositoryNamespace" type="System.String"#>
 
-using <#= ModelNamespace#>;
+<#@ import namespace="Microsoft.EntityFrameworkCore" #>
+
+using <#= ModelNamespace #>;
 using Microsoft.EntityFrameworkCore;
 
-namespace <#= RepositoryNamespace#>;
+namespace <#= RepositoryNamespace #>;
 
-public interface I<#= EntityName#>Repository : IRepository<#= EntityName#> 
+public interface I<#= EntityName #>Repository : IRepository<<#= EntityName #>> 
 {
 }
 
-public class <#= EntityName#>Repository(DbContext context) : 
-        : GenericRepository<#= EntityName#>(context), I<#= EntityName#>Repository
+public class <#= EntityName #>Repository(DbContext context) 
+        : GenericRepository<<#= EntityName #>>(context), I<#= EntityName #>Repository
 {
 }
+
+<#+
+    public string EntityName { get; set; }
+    public string ModelNamespace { get; set; }
+    public string RepositoryNamespace { get; set; }
+#>
+
